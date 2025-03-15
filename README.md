@@ -10,6 +10,6 @@
 
 ## Steps
 
-- [ ] Change folders to link components, remove all client state
-- [ ] Clean up db and data fetching
+- [x] Change folders to link components, remove all client state
+- [x] Clean up db and data fetching
 - [ ] Add homepage
