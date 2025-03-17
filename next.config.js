@@ -13,6 +13,8 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
+
+  skipTrailingSlashRedirect: true,
 };
 
 export default config;
