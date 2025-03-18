@@ -23,6 +23,7 @@ export const files_table = createTable(
     size: int("size").notNull(),
     url: text("url").notNull(),
     parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
+    type: text("type"),
     createdAt: timestamp("createdAt").notNull().defaultNow(),
   },
   (t) => {
