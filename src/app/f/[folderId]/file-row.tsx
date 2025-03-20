@@ -63,7 +63,7 @@ export function FolderRow(props: {
           <Button
             variant="ghost"
             onClick={() => deleteFolder(folder.id)}
-            aria-label="Delete file"
+            aria-label="Delete Folder"
           >
             <Trash2Icon size={20} />
           </Button>

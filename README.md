@@ -8,17 +8,19 @@
 - [x] Add file uploading
 - [x] Add analytics
 - [x] Add delete
-- [ ] Real homepage + onboarding
+- [x] Real homepage + onboarding
 
 ## Next Steps
 
 ### Folder deletions
 
+Done
 Make sure to fetch all of the folders that have it as a parent and their children too. Recursively find all of them and collect them all to then delete
 
 ### Folder creations
 
-Make server action that takes a name and parentId and creates a folder with that name and parentId, and creates a folder with that name and parentId (set ownerId as well to assign the folder to the user)
+Done
+Make server action that takes a name and parentId and creates a folder with that name and parentId (set ownerId as well to assign the folder to the user)
 
 ### Access control
 
