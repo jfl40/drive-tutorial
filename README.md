@@ -1,14 +1,6 @@
-# Drive Tutorial
+# Drive storage application
 
-## TODO
-
-- [x] Set up database and data model
-- [x] Move folder open state to URL
-- [x] Add auth
-- [x] Add file uploading
-- [x] Add analytics
-- [x] Add delete
-- [x] Real homepage + onboarding
+This is a drive storage application using Next.js, Clerk, UploadThing, PostHog, and SingleStoreDB. The app follows the tutorial from https://github.com/t3dotgg/drive-tutorial/ and adds additional implementation of updates such as: Folder creation/deletion, Access control, Inline file view and additional file details.
 
 ## Next Steps
 
@@ -26,7 +18,7 @@ Done
 
 ### Make a "file view" page
 
-Check his last video tutorial for inline image examples
+Done
 
 ### Toasts
 
