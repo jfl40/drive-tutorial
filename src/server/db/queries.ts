@@ -6,6 +6,7 @@ import {
   folders_table as foldersSchema,
 } from "~/server/db/schema";
 import { and, eq, isNull } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/server";
 
 export const QUERIES = {
   getFolders: function (folderId: number) {
@@ -46,7 +47,6 @@ export const QUERIES = {
       .where(eq(foldersSchema.id, folderId));
     return folder[0];
   },
-
   getRootFolderForUser: async function (userId: string) {
     const folder = await db
       .select()
@@ -55,6 +55,24 @@ export const QUERIES = {
         and(eq(foldersSchema.ownerId, userId), isNull(foldersSchema.parent)),
       );
     return folder[0];
+  },
+  getFileById: async function (fileId: number) {
+    const user = await auth();
+    if (!user.userId) {
+      throw new Error("Unauthorized");
+    }
+    const file = await db
+      .select()
+      .from(filesSchema)
+      .where(eq(filesSchema.id, fileId))
+      .limit(1);
+    if (!file[0]) {
+      throw new Error("File not found");
+    }
+    if (file[0].ownerId !== user.userId) {
+      throw new Error("Unauthorized");
+    }
+    return file[0];
   },
 };
 
