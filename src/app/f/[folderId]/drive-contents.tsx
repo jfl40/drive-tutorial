@@ -9,6 +9,7 @@ import { UploadButton } from "~/components/uploadthing";
 import { useRouter } from "next/navigation";
 import { createFolder } from "~/server/actions";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
@@ -89,7 +90,14 @@ export default function DriveContents(props: {
         <div className="mt-4 flex gap-4">
           <UploadButton
             endpoint="driveUploader"
-            onClientUploadComplete={() => navigate.refresh()}
+            onUploadBegin={() =>
+              toast("Uploading...", { duration: 100000, id: "upload-begin" })
+            }
+            onClientUploadComplete={() => {
+              toast.dismiss("upload-begin");
+              toast("Upload complete!");
+              navigate.refresh();
+            }}
             input={{ folderId: props.currentFolderId }}
           />
           <button

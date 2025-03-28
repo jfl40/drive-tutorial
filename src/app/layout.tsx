@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { PostHogProvider } from "./_providers/posthog-provider";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Drive Tutorial",
@@ -23,6 +24,7 @@ export default function RootLayout({
             {children}
             {modal}
             <div id="modal-root" />
+            <Toaster />
           </PostHogProvider>
         </body>
       </html>
