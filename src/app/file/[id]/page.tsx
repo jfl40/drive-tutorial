@@ -14,8 +14,13 @@ export default async function FileModal({ params }: FileModalProps) {
   const idAsNumber = parseInt(fileId);
   if (Number.isNaN(idAsNumber)) return notFound();
 
-  const file = await QUERIES.getFileById(idAsNumber);
-  if (!file) notFound();
+  let file;
+  try {
+    file = await QUERIES.getFileById(idAsNumber);
+  } catch (error) {
+    console.error("Error fetching file:", error);
+    return notFound();
+  }
 
   const allowedImageTypes = [
     "image/jpeg",
