@@ -24,7 +24,7 @@ export default function RootLayout({
             {children}
             {modal}
             <div id="modal-root" />
-            <Toaster />
+            <Toaster className="dark" />
           </PostHogProvider>
         </body>
       </html>
