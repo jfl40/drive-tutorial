@@ -12,7 +12,7 @@ const utApi = new UTApi();
 export async function deleteFile(fileId: number) {
   const session = await auth();
   if (!session.userId) {
-    return { error: "Unauthorized" };
+    return { success: false, error: "Unauthorized" };
   }
 
   const [file] = await db
@@ -20,9 +20,10 @@ export async function deleteFile(fileId: number) {
     .from(files_table)
     .where(
       and(eq(files_table.id, fileId), eq(files_table.ownerId, session.userId)),
-    );
+    )
+    .limit(1);
   if (!file) {
-    return { error: "File not found" };
+    return { success: false, error: "File not found" };
   }
 
   const utapiResult = await utApi.deleteFiles([
@@ -47,7 +48,7 @@ export async function deleteFile(fileId: number) {
 export async function deleteFolder(folderId: number) {
   const session = await auth();
   if (!session.userId) {
-    return { error: "Unauthorized" };
+    return { success: false, error: "Unauthorized" };
   }
 
   const foldersForDeletion = [folderId]; // Need to add the start folder itself
@@ -106,6 +107,10 @@ export async function deleteFolder(folderId: number) {
     console.log(dbDeleteFilesResult);
   } catch (error) {
     console.error("Error occurred during the deletion process:", error);
+    return {
+      success: false,
+      error: "Error occurred during the deletion process",
+    };
   }
 
   const c = await cookies();
@@ -118,7 +123,7 @@ export async function deleteFolder(folderId: number) {
 export async function createFolder(folderName: string, parentId: number) {
   const session = await auth();
   if (!session.userId) {
-    return { error: "Unauthorized" };
+    return { success: false, error: "Unauthorized" };
   }
 
   const dbAddResult = await db.insert(folders_table).values({
